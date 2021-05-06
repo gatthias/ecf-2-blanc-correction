@@ -62,26 +62,30 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                 <?= $error ?>
             </div>
         <?php } ?>
-    
-        <div class="card p-4 w-50">
-            <p>
-                Êtes-vous sûr de vouloir supprimer ce concert ?
-            </p>
-            <p>
-                <em>Lieu: </em> <?= $concert["lieu"] ?><br/>
-                <em>Date: </em> <?= afficheDateFR($concert["date"]) ?><br/>
-                <em>Groupe: </em> <?= $concert["groupe"] ?><br/>
-            </p>
-            <div>
-                <form method="POST" class="d-flex justify-content-around">
-                    <?php // Gestion du token CSRF ?>
-                    <input type="hidden" name="token" value="<?= $token ?>"/>
-                    
-                    <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
-                    <button type="submit" name="cancel" class="btn btn-primary">Annuler</button>
-                </form>
+        
+        <?php if(!empty($concert)){ ?>
+            <div class="card p-4 w-50">
+                <p>
+                    Êtes-vous sûr de vouloir supprimer ce concert ?
+                </p>
+                <p>
+                    <em>Lieu: </em> <?= $concert["lieu"] ?><br/>
+                    <em>Date: </em> <?= afficheDateFR($concert["date"]) ?><br/>
+                    <em>Groupe: </em> <?= $concert["groupe"] ?><br/>
+                </p>
+                <div class="d-flex justify-content-around">
+                    <form method="POST">
+                        <?php // Gestion du token CSRF ?>
+                        <input type="hidden" name="token" value="<?= $token ?>"/>
+
+                        <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
+                    </form>
+                    <form method="POST">
+                        <button type="submit" name="cancel" class="btn btn-primary">Annuler</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
 </body>
 </html>

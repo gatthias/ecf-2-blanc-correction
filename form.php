@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             "groupe" => htmlspecialchars($_POST["groupe"]),
             "note" => htmlspecialchars($_POST["note"])
         ]);
-        if($res !== false){
+        if($res === true){
             redirectTo("index.php");
         }else{
             $errors[] = "Erreur lors de la sauvegarde en base de données. Veuillez réessayer ultérieurement.";
@@ -46,6 +46,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                     <div class="form-group w-50">
                         <label for="input-lieu">Lieu</label><br/>
                         <select id="input-lieu" name="lieu">
+                            <option value="">Choisir un lieu</option>
                             <option>Toulon</option>
                             <option>La Valette du Var</option>
                             <option>La Garde</option>
